@@ -1,0 +1,34 @@
+
+<!--<sa-header></sa-header>
+
+
+<sa-navigation></sa-navigation>
+
+
+<div id="main" role="main">
+  <sa-layout-switcher></sa-layout-switcher>
+
+  <sa-ribbon></sa-ribbon>
+
+  <router-outlet></router-outlet>
+</div>
+
+<sa-footer></sa-footer>
+
+<sa-shortcut></sa-shortcut>
+-->
+
+
+<div class="wrapper">
+  <div class="sidebar" data-color='red' data-image="">
+    <app-sidebar></app-sidebar>
+    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+    <div *ngIf="isMaps('maps')">
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
