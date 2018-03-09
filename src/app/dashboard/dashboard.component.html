@@ -101,11 +101,11 @@
                 </div>
             </div>
 
-            <div class="row">
+          <!--  <div class="row">
                 <div class="col-md-3">
                     <div class="card" >
                         <div class="card-header card-chart" data-background-color="green">
-                            <div class="ct-chart" id="dailySalesChart"></div>
+                            <div class="ct-chart" id="dailySalesChart3"></div>
                         </div>
                         <div class="card-content">
                             <h4 class="title">Daily Sales</h4>
@@ -154,7 +154,7 @@
                 <div class="col-md-3">
                     <div class="card" >
                         <div class="card-header card-chart" data-background-color="green">
-                            <div class="ct-chart" id="dailySalesChart"></div>
+                            <div class="ct-chart" id="dailySalesChart4"></div>
                         </div>
                         <div class="card-content">
                             <h4 class="title">Daily Sales</h4>
@@ -168,6 +168,41 @@
                     </div>
                 </div>
             </div>
+-->
+            <div class="row">
+                <div class="col-md-3" *ngFor="let hotelItem of hotelesItems">
+                    <div class="card" >
+                        <div class="card-header card-chart" data-background-color="green">
+                            <div class="ct-chart" id="dailySalesChart{{hotelItem.hotelId}}"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title">{{hotelItem.hotelNombre}}</h4>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">business</i> Habitaciones: <br>
+                                <i class="material-icons">store</i> Ocupadas: <br>
+                                <i class="material-icons">info_outline</i> Libres: <br>
+                                <i class="material-icons">alarm_on</i> Pernoctaron: <br>
+                                <i class="material-icons">card_travel</i> Pertenencia: <br>
+                                <i class="fa fa-warning"></i> No Subió: <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="nav-container">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let hotelItem of hotelesItems">
+                        <a>
+                            <p>{{hotelItem.id}} {{hotelItem.nombre}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
 
             <div class="row">
                 <div class="col-lg-6 col-md-12">

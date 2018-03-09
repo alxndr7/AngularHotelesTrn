@@ -20,6 +20,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import {SessionStorageService} from 'ngx-webstorage';
 import {AuthenticationService} from './common/services/authentication.service';
 import {HttpService} from './common/services/http.service';
+import {DashboardService} from './common/services/dashboard.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ RouterModule,
       HttpService,
       AuthenticationService,
       SessionStorageService,
+      DashboardService,
   ],
   bootstrap: [AppComponent]
 })

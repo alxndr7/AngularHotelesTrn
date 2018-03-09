@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 
@@ -9,7 +10,7 @@ import * as Chartist from 'chartist';
 export class DashboardComponent implements OnInit {
 
   constructor() { }
-  startAnimationForLineChart(chart){
+  startAnimationForLineChart(chart) {
       let seq: any, delays: any, durations: any;
       seq = 0;
       delays = 80;
@@ -42,7 +43,7 @@ export class DashboardComponent implements OnInit {
 
       seq = 0;
   };
-  startAnimationForBarChart(chart){
+  startAnimationForBarChart(chart) {
       let seq2: any, delays2: any, durations2: any;
 
       seq2 = 0;
@@ -66,7 +67,7 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+      /!* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- *!/
 
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -85,12 +86,12 @@ export class DashboardComponent implements OnInit {
       }
 
       var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-      var dailySalesChart2 = new Chartist.Line('#dailySalesChart2', dataDailySalesChart, optionsDailySalesChart);
+      var dailySalesChart2 = new Chartist.Line('.dailySalesChart-2232322', dataDailySalesChart, optionsDailySalesChart);
       this.startAnimationForLineChart(dailySalesChart);
       this.startAnimationForLineChart(dailySalesChart2);
 
 
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+      /!* ----------==========     Completed Tasks Chart initialization    ==========---------- *!/
 
       const dataCompletedTasksChart: any = {
           labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
@@ -115,7 +116,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+      /!* ----------==========     Emails Subscription Chart initialization    ==========---------- *!/
 
       var dataEmailsSubscriptionChart = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -149,3 +150,4 @@ export class DashboardComponent implements OnInit {
   }
 
 }
+

@@ -1,150 +1,120 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnDestroy,
+    OnInit
+} from '@angular/core';
 import * as Chartist from 'chartist';
+import {AuthenticationService} from '../common/services/authentication.service';
+import {DashboardService} from '../common/services/dashboard.service';
+
+declare interface HotelesInfo {
+    hotelId: number;
+    hotelNombre: string;
+    hotelNumHab: number;
+}
+
+export const HOTELES2: HotelesInfo[] = [
+    { hotelId: 1, hotelNombre: 'Hotel Plaza',  hotelNumHab: 100 },
+    { hotelId: 2, hotelNombre: 'Hotel Dumbao',  hotelNumHab: 50},
+    { hotelId: 3, hotelNombre: 'Hotel Yaureñita',  hotelNumHab: 70},
+    { hotelId: 4, hotelNombre: 'Hotel Apolo',  hotelNumHab: 70},
+];
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterContentChecked {
+    hoteles: any[];
+    hotelesItems: any[];
+    constructor(public _dashboardService: DashboardService) {}
+    startAnimationForLineChart(chart){
+        let seq: any, delays: any, durations: any;
+        seq = 0;
+        delays = 80;
+        durations = 500;
 
-  constructor() { }
-  startAnimationForLineChart(chart){
-      let seq: any, delays: any, durations: any;
-      seq = 0;
-      delays = 80;
-      durations = 500;
-
-      chart.on('draw', function(data) {
-        if(data.type === 'line' || data.type === 'area') {
-          data.element.animate({
-            d: {
-              begin: 600,
-              dur: 700,
-              from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-              to: data.path.clone().stringify(),
-              easing: Chartist.Svg.Easing.easeOutQuint
+        chart.on('draw', function(data) {
+            if(data.type === 'line' || data.type === 'area') {
+                data.element.animate({
+                    d: {
+                        begin: 600,
+                        dur: 700,
+                        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                        to: data.path.clone().stringify(),
+                        easing: Chartist.Svg.Easing.easeOutQuint
+                    }
+                });
+            } else if(data.type === 'point') {
+                seq++;
+                data.element.animate({
+                    opacity: {
+                        begin: seq * delays,
+                        dur: durations,
+                        from: 0,
+                        to: 1,
+                        easing: 'ease'
+                    }
+                });
             }
-          });
-        } else if(data.type === 'point') {
-              seq++;
-              data.element.animate({
-                opacity: {
-                  begin: seq * delays,
-                  dur: durations,
-                  from: 0,
-                  to: 1,
-                  easing: 'ease'
-                }
-              });
-          }
-      });
+        });
 
-      seq = 0;
-  };
-  startAnimationForBarChart(chart){
-      let seq2: any, delays2: any, durations2: any;
+        seq = 0;
+    };
 
-      seq2 = 0;
-      delays2 = 80;
-      durations2 = 500;
-      chart.on('draw', function(data) {
-        if(data.type === 'bar'){
-            seq2++;
-            data.element.animate({
-              opacity: {
-                begin: seq2 * delays2,
-                dur: durations2,
-                from: 0,
-                to: 1,
-                easing: 'ease'
-              }
-            });
-        }
-      });
-
-      seq2 = 0;
-  };
-  ngOnInit() {
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
-      const dataDailySalesChart: any = {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-          series: [
-              [12, 17, 7, 17, 23, 18, 38]
-          ]
-      };
-
-     const optionsDailySalesChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-      }
-
-      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-      this.startAnimationForLineChart(dailySalesChart);
-
-
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
-      const dataCompletedTasksChart: any = {
-          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-          series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
-          ]
-      };
-
-     const optionsCompletedTasksChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-      }
-
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-      // start animation for the Completed Tasks Chart - Line Chart
-      this.startAnimationForLineChart(completedTasksChart);
-
-
-
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-
-      var dataEmailsSubscriptionChart = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        series: [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
-        ]
-      };
-      var optionsEmailsSubscriptionChart = {
-          axisX: {
-              showGrid: false
-          },
-          low: 0,
-          high: 1000,
-          chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
-      };
-      var responsiveOptions: any[] = [
-        ['screen and (max-width: 640px)', {
-          seriesBarDistance: 5,
-          axisX: {
-            labelInterpolationFnc: function (value) {
-              return value[0];
+    ngOnInit() {
+      /*  this._dashboardService.getHoteles().subscribe(
+            function(data) {
+                console.log("NEXT");
+                this.hoteles = data;
+                this.hotelesItems = this.hoteles.filter(hotelItem => hotelItem);
+            },
+            function(error) {   console.error(error);},
+            function() { console.log("the subscription is completed")}
+        );*/
+        this._dashboardService.getHoteles().subscribe(
+            (data) => {
+                this.hoteles = data;
+                this.hotelesItems = this.hoteles.filter(hotelItem => hotelItem);
+            },
+            err => {
+                console.error(err);
             }
-          }
-        }]
-      ];
-      var emailsSubscriptionChart = new Chartist.Bar('#emailsSubscriptionChart', dataEmailsSubscriptionChart, optionsEmailsSubscriptionChart, responsiveOptions);
+        );
+        /*  this.hotelesItems = this.hoteles.filter(hotelItem => hotelItem);*/
+        /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+    }
 
-      //start animation for the Emails Subscription Chart
-      this.startAnimationForBarChart(emailsSubscriptionChart);
-  }
+
+    ngAfterContentChecked() {
+        
+        console.log("despues de init");
+        const dataDailySalesChart: any = {
+            labels: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
+            series: [
+                [12, 17, 7, 17, 23, 18, 38]
+            ]
+        };
+
+        const optionsDailySalesChart: any = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            low: 0,
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+        };
+
+        var dailySalesChart = new Chartist.Line('#dailySalesChart1', dataDailySalesChart, optionsDailySalesChart);
+        var dailySalesChart2 = new Chartist.Line('#dailySalesChart2', dataDailySalesChart, optionsDailySalesChart);
+        var dailySalesChart3 = new Chartist.Line('#dailySalesChart3', dataDailySalesChart, optionsDailySalesChart);
+        var dailySalesChart4 = new Chartist.Line('#dailySalesChart4', dataDailySalesChart, optionsDailySalesChart);
+
+        this.startAnimationForLineChart(dailySalesChart);
+        this.startAnimationForLineChart(dailySalesChart2);
+        this.startAnimationForLineChart(dailySalesChart3);
+        this.startAnimationForLineChart(dailySalesChart4);
+    }
 
 }
