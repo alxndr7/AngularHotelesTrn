@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit, AfterContentChecked {
 
 
     ngAfterContentChecked() {
-        
+
         console.log("despues de init");
         const dataDailySalesChart: any = {
             labels: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
