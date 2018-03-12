@@ -12,9 +12,11 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MainLayoutComponent} from './components/app-layouts/main-layout.component';
+import {HotelesComponent} from './+hoteles/hoteles.component';
 
 const routes: Routes =[
     { path: 'dashboard',      component: DashboardComponent },
+    { path: 'mantenimiento-hoteles',      component: HotelesComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
@@ -30,6 +32,8 @@ const routes: Routes =[
             { path: 'dashboard',      component: DashboardComponent },
             { path: 'auth', redirectTo: 'user-profile', pathMatch: 'full' },
             { path: 'user-profile',      component: UserProfileComponent },
+            { path: 'auth', redirectTo: 'mantenimiento-hoteles', pathMatch: 'full' },
+            { path: 'mantenimiento-hoteles',      component: HotelesComponent },
             { path: 'auth', redirectTo: 'icons', pathMatch: 'full' },
             { path: 'icons',      component: IconsComponent },
         ]

@@ -25,10 +25,16 @@ export const HOTELES2: HotelesInfo[] = [
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, AfterContentChecked {
+export class DashboardComponent implements OnInit, AfterViewInit {
     hoteles: any[];
     hotelesItems: any[];
-    constructor(public _dashboardService: DashboardService) {}
+    constructor(public _dashboardService: DashboardService) {
+        console.log('constructor');
+        setTimeout(() => {    //<<<---    using ()=> syntax
+            this.hotelesItems = HOTELES2.filter(hotelItem => hotelItem);
+            this.function_hoteles();
+        }, 3000);
+    }
     startAnimationForLineChart(chart){
         let seq: any, delays: any, durations: any;
         seq = 0;
@@ -64,6 +70,7 @@ export class DashboardComponent implements OnInit, AfterContentChecked {
     };
 
     ngOnInit() {
+
       /*  this._dashboardService.getHoteles().subscribe(
             function(data) {
                 console.log("NEXT");
@@ -73,7 +80,7 @@ export class DashboardComponent implements OnInit, AfterContentChecked {
             function(error) {   console.error(error);},
             function() { console.log("the subscription is completed")}
         );*/
-        this._dashboardService.getHoteles().subscribe(
+     /*   this._dashboardService.getHoteles().subscribe(
             (data) => {
                 this.hoteles = data;
                 this.hotelesItems = this.hoteles.filter(hotelItem => hotelItem);
@@ -81,15 +88,14 @@ export class DashboardComponent implements OnInit, AfterContentChecked {
             err => {
                 console.error(err);
             }
-        );
+        );*/
         /*  this.hotelesItems = this.hoteles.filter(hotelItem => hotelItem);*/
         /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
     }
-
-
-    ngAfterContentChecked() {
-
+    ngAfterViewInit() {
         console.log("despues de init");
+    }
+    function_hoteles() {
         const dataDailySalesChart: any = {
             labels: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
             series: [
