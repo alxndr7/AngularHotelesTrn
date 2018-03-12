@@ -21,6 +21,7 @@ import {SessionStorageService} from 'ngx-webstorage';
 import {AuthenticationService} from './common/services/authentication.service';
 import {HttpService} from './common/services/http.service';
 import {DashboardService} from './common/services/dashboard.service';
+import { HotelesComponent } from './+hoteles/hoteles.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {DashboardService} from './common/services/dashboard.service';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    HotelesComponent,
 
   ],
   imports: [
