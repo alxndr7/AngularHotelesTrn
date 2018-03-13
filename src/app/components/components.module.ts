@@ -22,6 +22,6 @@ import {MainLayoutComponent} from './app-layouts/main-layout.component';
         FooterComponent,
         NavbarComponent,
         SidebarComponent
-    ]
+    ],
 })
 export class ComponentsModule { }

@@ -17,40 +17,45 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import {SessionStorageService} from 'ngx-webstorage';
-import {AuthenticationService} from './common/services/authentication.service';
-import {HttpService} from './common/services/http.service';
-import {DashboardService} from './common/services/dashboard.service';
+import { SessionStorageService} from 'ngx-webstorage';
+import { AuthenticationService} from './common/services/authentication.service';
+import { HttpService} from './common/services/http.service';
+import { DashboardService} from './common/services/dashboard.service';
 import { HotelesComponent } from './+hoteles/hoteles.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalNuevoHotelComponent } from './Modals/modal-nuevo-hotel/modal-nuevo-hotel.component';
+import { ModalEditarHotelComponent } from './Modals/modal-editar-hotel/modal-editar-hotel.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    UserProfileComponent,
-    TableListComponent,
-    TypographyComponent,
-    IconsComponent,
-    MapsComponent,
-    NotificationsComponent,
-    UpgradeComponent,
-    HotelesComponent,
-
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    ComponentsModule,
-RouterModule,
-    AppRoutingModule
-  ],
-  providers: [
-      HttpService,
-      AuthenticationService,
-      SessionStorageService,
-      DashboardService,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        DashboardComponent,
+        UserProfileComponent,
+        TableListComponent,
+        TypographyComponent,
+        IconsComponent,
+        MapsComponent,
+        NotificationsComponent,
+        UpgradeComponent,
+        HotelesComponent,
+        ModalNuevoHotelComponent,
+        ModalEditarHotelComponent,
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        ComponentsModule,
+        RouterModule,
+        AppRoutingModule,
+        NgbModule.forRoot(),
+    ],
+    providers: [
+        HttpService,
+        AuthenticationService,
+        SessionStorageService,
+        DashboardService,
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
