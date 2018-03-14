@@ -29,11 +29,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     hoteles: any[];
     hotelesItems: any[];
     constructor(public _dashboardService: DashboardService) {
-        console.log('constructor');
+      /*  console.log('constructor');
         setTimeout(() => {    //<<<---    using ()=> syntax
             this.hotelesItems = HOTELES2.filter(hotelItem => hotelItem);
             this.function_hoteles();
-        }, 3000);
+        },3000);*/
     }
     startAnimationForLineChart(chart){
         let seq: any, delays: any, durations: any;
@@ -70,6 +70,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     };
 
     ngOnInit() {
+        setTimeout(() => {    //<<<---    using ()=> syntax
+            this.hotelesItems = HOTELES2.filter(hotelItem => hotelItem);
+            this.function_hoteles();
+        },3000);
 
       /*  this._dashboardService.getHoteles().subscribe(
             function(data) {
@@ -94,6 +98,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     ngAfterViewInit() {
         console.log("despues de init");
+        //this.function_hoteles();
     }
     function_hoteles() {
         const dataDailySalesChart: any = {

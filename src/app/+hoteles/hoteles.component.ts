@@ -2,6 +2,7 @@ import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { DashboardService } from '../common/services/dashboard.service';
 import { MHotel } from '../common/models/mHotel.model';
 import {FormGroup} from '@angular/forms';
+import {HotelesService} from '../common/services/hoteles.service';
 
 
 @Component({
@@ -12,6 +13,8 @@ import {FormGroup} from '@angular/forms';
 export class HotelesComponent implements OnInit {
     @ViewChild('myModal') myModal;
     @Input('show-modal') showModal: boolean;
+    hotel: MHotel;
+    hotelItem : any[];
     hoteles: MHotel[];
     hotelesItems: any[];
     closeResult: string;
@@ -19,7 +22,9 @@ export class HotelesComponent implements OnInit {
     display='none';
     type: FormGroup;
 
-    constructor(public _dashboardService: DashboardService) { }
+    constructor(public _dashboardService: DashboardService, public _hotelesService: HotelesService) {
+        this.hotel = new MHotel(1,"prueba",23,"azul");
+    }
 
     ngOnInit() {
         this._dashboardService.getHoteles().subscribe(
@@ -38,9 +43,6 @@ export class HotelesComponent implements OnInit {
     ver_distribucion(id_hotel) {
         console.log('ver: ' + id_hotel);
     }
-    editar_hotel(id_hotel) {
-        console.log('editar: ' + id_hotel);
-    }
     eliminar_hotel(id_hotel) {
         console.log('eliminar: ' + id_hotel);
     }
@@ -52,6 +54,22 @@ export class HotelesComponent implements OnInit {
             this.valor_item = id;
         }, 10);
     }
+    editarHotel(id_hotel) {
+        this._hotelesService.getHotelPorId(id_hotel).subscribe(
+            (data) => {
+                console.log(data);
+                this.display = 'block';
+                this.hotel = data;
+                this.valor_item = 'hola';
+                console.log("data: " +  JSON.stringify(this.hotel));
+                console.log("editarhotel: " +   this.hotel[0]);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
     onCloseHandled(){
         this.display = 'none';
     }

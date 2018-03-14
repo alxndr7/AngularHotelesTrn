@@ -33,7 +33,7 @@
                 <td>{{hotelItem.hotelNumHab}}</td>
                 <td>{{hotelItem.flota}}</td>
                 <td><button type="button"  class="btn btn-primary" (click)="openModel(hotelItem.hotelId)">Ver</button></td>
-                <td><button type="button" class="btn btn-warning" (click)="editar_hotel(hotelItem.hotelId)">Editar</button></td>
+                <td><button type="button" class="btn btn-warning" (click)="editarHotel(hotelItem.hotelId)">Editar</button></td>
                 <td><button type="button" class="btn btn-danger" (click)="eliminar_hotel(hotelItem.hotelId)">Eliminar</button></td>
               </tr>
               </tbody>
@@ -79,7 +79,7 @@
                 <label class="control-label" for="email">Nombre del Hotel:
                   <span class="star">*</span>
                 </label>
-                <input type="text" id="email" class="form-control">
+                <input type="text" id="email" class="form-control" value="{{valor_item}}">
               </div>
               </div>
               <div class="col-sm-6">
@@ -87,7 +87,7 @@
                   <label class="control-label" for="email">Número de Habitaciones:
                     <span class="star">*</span>
                   </label>
-                  <input type="text" id="email" class="form-control">
+                  <input type="text" id="email" class="form-control" value="{{hotel.hotelNumHab}}">
                 </div>
               </div>
               <div class="col-sm-6">
@@ -95,7 +95,7 @@
                   <label class="control-label" for="email">Asignado a la Flota:
                     <span class="star">*</span>
                   </label>
-                  <input type="text" id="email" class="form-control">
+                  <input type="text" id="email" class="form-control" value="{{hotel.flota}}">
                 </div>
               </div>
             </div>

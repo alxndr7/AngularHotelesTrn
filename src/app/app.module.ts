@@ -25,6 +25,7 @@ import { HotelesComponent } from './+hoteles/hoteles.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalNuevoHotelComponent } from './Modals/modal-nuevo-hotel/modal-nuevo-hotel.component';
 import { ModalEditarHotelComponent } from './Modals/modal-editar-hotel/modal-editar-hotel.component';
+import {HotelesService} from './common/services/hoteles.service';
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import { ModalEditarHotelComponent } from './Modals/modal-editar-hotel/modal-edi
         AuthenticationService,
         SessionStorageService,
         DashboardService,
+        HotelesService,
     ],
     bootstrap: [AppComponent]
 })
